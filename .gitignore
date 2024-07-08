@@ -1,0 +1,21 @@
+# Byte-compiled / optimized Python files
+*.pyc
+__pycache__/
+
+# Logs
+*.log
+
+# Runtime directories
+celerybeat-schedule/
+
+# Environment variables
+.env
+
+# IDE files
+.idea/
+
+# Compiled Python files
+*.pyc
+
+# Dependency directories
+venv/
