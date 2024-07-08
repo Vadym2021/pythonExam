@@ -3,11 +3,11 @@ import os
 from django.contrib.auth import get_user_model
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
-from djangochannelsrestframework.permissions import IsAuthenticated
+
 
 from rest_framework import status
 from rest_framework.generics import GenericAPIView, ListCreateAPIView, ListAPIView
-from rest_framework.permissions import AllowAny, IsAdminUser
+from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
 
 from apps.cars.models import CarModel
@@ -26,7 +26,7 @@ class UserListCreateView(ListCreateAPIView):
     """
     serializer_class = UserSerializer
     queryset = UserModel.objects.all()
-    permission_classes = [AllowAny]
+    permission_classes = (AllowAny,)
     # permission_classes = (IsAuthentificatedOrWriteOnly,)
 
     # def get_permissions(self):
@@ -43,6 +43,7 @@ class UserListCreateView(ListCreateAPIView):
 
 class UserCarsListView(ListAPIView):
     pagination_class = None
+    permission_classes = (IsAuthenticated,)
 
     def get_serializer_class(self):
         user = self.request.user
