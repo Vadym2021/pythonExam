@@ -1,8 +1,11 @@
+from datetime import datetime
+
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.core import validators as V
 
 from apps.user.models import UserModel
-from core.services.upload_photo import upload_photo
+from core.services import upload_photo
 
 
 class CarBrand(models.Model):
@@ -39,13 +42,18 @@ class CarModel(models.Model):
 
     brand = models.ForeignKey(CarBrand, on_delete=models.CASCADE)
     model = models.ForeignKey(CarBrandModel, on_delete=models.CASCADE)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    price = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])
     price_usd = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     price_eur = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     price_uah = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-    exchange_rate_usd = models.DecimalField(max_digits=10, decimal_places=4, null=True, blank=True)
-    exchange_rate_eur = models.DecimalField(max_digits=10, decimal_places=4, null=True, blank=True)
-    year = models.IntegerField()
+    exchange_rate_usd = models.DecimalField(max_digits=10, decimal_places=5, null=True, blank=True)
+    exchange_rate_eur = models.DecimalField(max_digits=10, decimal_places=5, null=True, blank=True)
+    year = models.IntegerField(
+        validators=[
+            MinValueValidator(1900),
+            MaxValueValidator(datetime.now().year)
+        ]
+    )
     currency = models.CharField(max_length=3, choices=CURRENCY_CHOICES)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

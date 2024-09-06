@@ -4,7 +4,6 @@ from django.contrib.auth import get_user_model
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
 
-
 from rest_framework import status
 from rest_framework.generics import GenericAPIView, ListCreateAPIView, ListAPIView
 from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
@@ -18,27 +17,9 @@ UserModel = get_user_model()
 
 
 class UserListCreateView(ListCreateAPIView):
-    """
-    get:
-        get All users
-    post:
-        create new user
-    """
     serializer_class = UserSerializer
     queryset = UserModel.objects.all()
     permission_classes = (AllowAny,)
-    # permission_classes = (IsAuthentificatedOrWriteOnly,)
-
-    # def get_permissions(self):
-    #     if self.request.method == 'GET':
-    #         return (IsAuthenticated(),)
-    #     return (AllowAny(),)
-
-
-# class UserListView(ListAPIView):
-#     serializer_class = UserSerializer
-#     queryset = UserModel.objects.all()
-#     permission_classes = [IsAuthenticated]
 
 
 class UserCarsListView(ListAPIView):
@@ -58,7 +39,6 @@ class UserCarsListView(ListAPIView):
 
 class UserBlockView(GenericAPIView):
     serializer_class = UserSerializer
-    # queryset = UserModel.objects.all()
     permission_classes = (IsAdminUser,)
 
     def get_queryset(self):
@@ -76,7 +56,6 @@ class UserBlockView(GenericAPIView):
 
 class UserUnBlockView(GenericAPIView):
     serializer_class = UserSerializer
-    # queryset = UserModel.objects.all()
     permission_classes = (IsAdminUser,)
 
     def get_queryset(self):
@@ -91,24 +70,7 @@ class UserUnBlockView(GenericAPIView):
         return Response(serializer.data, status.HTTP_200_OK)
 
 
-# class UserAddAvatarView(UpdateAPIView):
-#     permission_classes = (IsAuthenticated,)
-#     serializer_class = ProfileAvatarSerializer
-#     http_method_names = ('put',)
-#
-#     def get_object(self):
-#         return self.request.user.profile
-#
-#     def perform_update(self, serializer):
-#         profile: ProfileModel = self.get_object()
-#         profile.avatar.delete()
-#         super().perform_update(serializer)
-
-
 class TestEmailView(GenericAPIView):
-    """
-    Test Email Endpoint
-    """
     permission_classes = [AllowAny]
 
     def get_serializer(self, *args, **kwargs):

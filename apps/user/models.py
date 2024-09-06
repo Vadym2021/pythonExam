@@ -1,9 +1,11 @@
 from django.db import models
 from django.core import validators as V
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+
+from apps.user.managers import UserManager
 from core.models import BaseModel
 from core.enums.regex_enum import RegexEnum
-from apps.user.managers import UserManager
+
 
 
 class UserModel(AbstractBaseUser, PermissionsMixin, BaseModel):
@@ -29,9 +31,6 @@ class UserModel(AbstractBaseUser, PermissionsMixin, BaseModel):
 
     def is_premium(self):
         return self.account_type == 'premium'
-
-
-
 
 
 class ProfileModel(BaseModel):

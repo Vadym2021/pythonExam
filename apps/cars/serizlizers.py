@@ -1,8 +1,9 @@
 from rest_framework import serializers
 from better_profanity import profanity
-from apps.cars.models import CarModel, CarBrand, CarBrandModel
+
 from django.core.mail import send_mail
 
+from apps.cars.models import CarBrand, CarBrandModel, CarModel
 from core.services.stat_service import StatService
 
 
@@ -21,7 +22,8 @@ class CarBrandModelSerializer(serializers.ModelSerializer):
 class BasicCarSerializer(serializers.ModelSerializer):
     class Meta:
         model = CarModel
-        fields = ['id', 'brand', 'model', 'price', 'year', 'created_at', 'updated_at']
+        fields = ['id', 'brand', 'model', 'price', 'price_usd', 'price_eur', 'price_uah', 'year', 'created_at',
+                  'updated_at']
 
 
 class PremiumCarSerializer(serializers.ModelSerializer):
@@ -30,7 +32,10 @@ class PremiumCarSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CarModel
-        fields = ['id', 'brand', 'model', 'price', 'year', 'created_at', 'updated_at',
+        fields = ['id', 'brand', 'model', 'price', 'price_usd', 'price_eur', 'price_uah', 'exchange_rate_usd',
+                  'exchange_rate_eur', 'year',
+                  'currency',
+                  'created_at', 'updated_at',
                   'view_count', 'view_count_day', 'view_count_week', 'view_count_month',
                   'average_price_region', 'average_price_ukraine', 'region']
 
@@ -76,4 +81,3 @@ class PremiumCarSerializer(serializers.ModelSerializer):
         if value < 1900 or value > current_year:
             raise serializers.ValidationError(f"Год должен быть между 1900 и {current_year}.")
         return value
-

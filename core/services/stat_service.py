@@ -1,4 +1,5 @@
 from django.db.models import Avg
+
 from apps.cars.models import CarModel
 
 
@@ -10,6 +11,7 @@ class StatService:
         car.view_count_week += 1
         car.view_count_month += 1
         car.save()
+
 
     @staticmethod
     def average_price_by_region(region):

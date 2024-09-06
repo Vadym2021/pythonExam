@@ -6,8 +6,9 @@ from rest_framework.generics import ListCreateAPIView, get_object_or_404
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 
-from apps.cars.models import CarModel, CarBrand, CarBrandModel
+from apps.cars.models import CarBrand, CarBrandModel, CarModel
 from apps.cars.serizlizers import CarBrandSerializer, CarBrandModelSerializer, PremiumCarSerializer, BasicCarSerializer
+from core.services.currency_service import update_car_price_for_instance
 from core.services.email_service import EmailService
 from core.services.stat_service import StatService
 
@@ -36,8 +37,9 @@ class CarListCreateView(ListCreateAPIView):
 
     def get_serializer_class(self):
         user = self.request.user if self.request.user.is_authenticated else None
-        print(self.request.user.account_type)
+
         print(user)
+
         if user and user.account_type == 'premium':
             return PremiumCarSerializer
         return BasicCarSerializer
@@ -46,22 +48,30 @@ class CarListCreateView(ListCreateAPIView):
         seller = self.request.user if self.request.user.is_authenticated else None
 
         if not seller:
-            raise ValidationError('Пользователь должен быть аутентифицирован.')
+            return Response({'detail': 'Пользователь должен быть аутентифицирован.'},
+                            status=status.HTTP_401_UNAUTHORIZED)
+            # raise ValidationError('Пользователь должен быть аутентифицирован.')
 
         if seller.account_type == 'basic' and CarModel.objects.filter(seller=seller).count() >= 1:
-            raise ValidationError('Базовый аккаунт может выставить на продажу только одно авто.')
+            raise ValidationError('Базовый аккаунт может выставить на продажу только одно авто.',
+                                  code=status.HTTP_403_FORBIDDEN)
 
         instance = serializer.save(seller=seller)
+        print(instance.__dict__)
         instance.is_active = True
+
+        update_car_price_for_instance(instance)
+        # update_car_prices()
+        StatService.increment_view_count(instance)
         instance.save()
 
-        StatService.increment_view_count(instance)
+        return Response({'message': 'Автомобиль успешно добавлен'}, status=status.HTTP_201_CREATED)
 
 
 @api_view(['POST'])
 @permission_classes((IsAuthenticated,))
 def send_brand_request_email(request):
-    brand_name = request.data.get('brand_name', '')
+    brand_name = request.data.get('brand', '')
     seller_email = request.user.email
 
     try:
@@ -95,4 +105,5 @@ def car_details(request, car_id):
         'views': views,
         'prices': prices,
     }
-    return Response(response)
+
+    return Response(response, status=status.HTTP_200_OK)

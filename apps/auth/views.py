@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.shortcuts import render
 from django.utils.decorators import method_decorator
 
 from rest_framework import status
@@ -9,14 +10,24 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.serializers import TokenRefreshSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-from apps.user.serializer import UserSerializer
+
 from core.services.email_service import EmailService
-from core.services.jwt_service import ActivateToken, JWTService, RecoveryToken, SocketToken
+
 from drf_yasg.utils import swagger_auto_schema
 
+from core.services.jwt_service import ActivateToken, JWTService, RecoveryToken, SocketToken
 from .serializers import EmailSerializer, PasswordSerializer
+from ..user.serializer import UserSerializer
 
 UserModel = get_user_model()
+
+
+class ActivationConfirmationView(GenericAPIView):
+    permission_classes = [AllowAny]
+
+    def get(self, request, *args, **kwargs):
+        token = kwargs['token']
+        return render(request, 'activation_confirm.html', {'token': token})
 
 
 class UserActivateView(GenericAPIView):
