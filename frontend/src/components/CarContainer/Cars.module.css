@@ -1,5 +1,11 @@
 .CarContainer {
     display: flex;
-    flex-direction: column;
-    gap: 20px;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 16px;
+}
+
+.Error {
+    color: red;
+    margin-bottom: 16px;
 }

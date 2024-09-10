@@ -1,4 +1,5 @@
 from datetime import datetime
+from decimal import Decimal
 
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
@@ -42,12 +43,46 @@ class CarModel(models.Model):
 
     brand = models.ForeignKey(CarBrand, on_delete=models.CASCADE)
     model = models.ForeignKey(CarBrandModel, on_delete=models.CASCADE)
-    price = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])
-    price_usd = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-    price_eur = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-    price_uah = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-    exchange_rate_usd = models.DecimalField(max_digits=10, decimal_places=5, null=True, blank=True)
-    exchange_rate_eur = models.DecimalField(max_digits=10, decimal_places=5, null=True, blank=True)
+    price = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        validators=[MinValueValidator(Decimal('0'))]
+    )
+    price_usd = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        null=True,
+        blank=True,
+        validators=[MinValueValidator(Decimal('0'))]
+    )
+    price_eur = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        null=True,
+        blank=True,
+        validators=[MinValueValidator(Decimal('0'))]
+    )
+    price_uah = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        null=True,
+        blank=True,
+        validators=[MinValueValidator(Decimal('0'))]
+    )
+    exchange_rate_usd = models.DecimalField(
+        max_digits=10,
+        decimal_places=5,
+        null=True,
+        blank=True,
+        validators=[MinValueValidator(Decimal('0'))]
+    )
+    exchange_rate_eur = models.DecimalField(
+        max_digits=10,
+        decimal_places=5,
+        null=True,
+        blank=True,
+        validators=[MinValueValidator(Decimal('0'))]
+    )
     year = models.IntegerField(
         validators=[
             MinValueValidator(1900),
@@ -59,9 +94,12 @@ class CarModel(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     seller = models.ForeignKey(UserModel, on_delete=models.CASCADE)
     is_active = models.BooleanField(default=False)
-    photo = models.ImageField(upload_to=upload_photo, blank=True, validators=[
-        V.FileExtensionValidator(['gif', 'jpeg', 'png', 'jpg'])
-    ], max_length=255)
+    photo = models.ImageField(
+        upload_to=upload_photo,
+        blank=True,
+        validators=[V.FileExtensionValidator(['gif', 'jpeg', 'png', 'jpg'])],
+        max_length=255
+    )
     region = models.CharField(max_length=20)
     description = models.TextField(blank=True)
     edit_count = models.PositiveIntegerField(default=0)

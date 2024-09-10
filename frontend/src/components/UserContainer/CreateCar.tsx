@@ -55,15 +55,26 @@ const CreateCar = () => {
     const onSubmit = async (data: ICarCreate) => {
         try {
             const formData = new FormData();
-            for (const [key, value] of Object.entries(data)) {
-                formData.append(key, value);
-            }
 
+            // Добавление всех полей данных, кроме фото
+            Object.entries(data).forEach(([key, value]) => {
+                if (value !== undefined && value !== null) {
+                    formData.append(key, value.toString());
+                }
+            });
+
+            // Отладка: Вывод содержимого formData
+            formData.forEach((value, key) => {
+                console.log(`${key}: ${value}`);
+            });
+
+            // Добавление фото, если оно есть
             const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
             if (fileInput && fileInput.files?.[0]) {
                 formData.append('photo', fileInput.files[0]);
             }
 
+            // Отправка запроса
             const response = await carService.create(formData);
             setSuccessMessage('Машина успешно создана.');
             setErrorMessage(null);
@@ -134,6 +145,7 @@ const CreateCar = () => {
                 <div>
                     <label>Валюта:</label>
                     <select {...register('currency', { required: true })}>
+                        <option value="">Выберите валюту</option>
                         <option value="USD">USD</option>
                         <option value="EUR">EUR</option>
                         <option value="UAH">UAH</option>

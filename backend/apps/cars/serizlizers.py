@@ -22,8 +22,9 @@ class CarBrandModelSerializer(serializers.ModelSerializer):
 class BasicCarSerializer(serializers.ModelSerializer):
     class Meta:
         model = CarModel
-        fields = ['id', 'brand', 'model', 'price', 'price_usd', 'price_eur', 'price_uah', 'year', 'created_at',
-                  'updated_at', 'photo', 'description']
+        fields = ['id', 'brand', 'model', 'price', 'price_usd', 'price_eur', 'price_uah', 'year', 'currency',
+                  'created_at',
+                  'updated_at', 'photo', 'region', 'description']
 
 
 class PremiumCarSerializer(serializers.ModelSerializer):

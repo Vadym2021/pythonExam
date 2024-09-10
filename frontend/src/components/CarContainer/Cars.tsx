@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react';
-import {carService} from "../../services/carService";
-import {Car} from "./Car";
-import {Brand, Model} from "../../interfaces/car.interfase";
+import React, { useEffect, useState } from 'react';
+import { carService } from "../../services/carService";
+import { Car } from "./Car";
+import { Brand, Model } from "../../interfaces/car.interfase";
 import css from './Cars.module.css';
 
 const Cars = () => {
@@ -18,7 +18,7 @@ const Cars = () => {
                 token = localStorage.getItem('access');
                 localStorage.removeItem('access');
 
-                const {data} = await carService.getAll();
+                const { data } = await carService.getAll();
                 setCars(data);
             } catch (error) {
                 setError('Ошибка при загрузке машин');
@@ -66,7 +66,7 @@ const Cars = () => {
 
     return (
         <div className={css.CarContainer}>
-            {error && <div style={{color: 'red'}}>{error}</div>}
+            {error && <div className={css.Error}>{error}</div>}
             {cars.map(car => (
                 <Car
                     key={car.id}
@@ -81,4 +81,4 @@ const Cars = () => {
     );
 };
 
-export {Cars};
+export { Cars };

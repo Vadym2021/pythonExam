@@ -8,8 +8,11 @@ const HeaderPage = () => {
             <NavLink to={'cars'} className={({ isActive }) => isActive ? css.active : ''}>
                 Просмотр машин без регистрации
             </NavLink>
+            <NavLink to={'auth'} className={({ isActive }) => isActive ? css.active : ''}>
+                Войти
+            </NavLink>
             <NavLink to={'user'} className={({ isActive }) => isActive ? css.active : ''}>
-                Пользователи
+                Регистрация
             </NavLink>
         </div>
     );

@@ -13,6 +13,10 @@ from core.services.currency_service import update_car_price_for_instance
 from core.services.email_service import EmailService
 from core.services.stat_service import StatService
 
+import logging
+
+logger = logging.getLogger(__name__)
+
 UserModel = get_user_model()
 
 
@@ -88,6 +92,8 @@ class CarListCreateView(ListCreateAPIView):
 
         instance = serializer.save(seller=seller)
         instance.is_active = True
+
+        logger.info(f"Созданный экземпляр: {instance}")
 
         update_car_price_for_instance(instance)
 

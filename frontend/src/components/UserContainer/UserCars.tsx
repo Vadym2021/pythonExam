@@ -77,8 +77,19 @@ const UserCars: React.FC = () => {
                     <div key={car.id} className={css.CarCard}>
                         <h2>{getBrandName(car.brand)} {getModelName(car.model)}</h2>
                         <p><strong>Год:</strong> {car.year}</p>
-                        <p><strong>Цена:</strong> {car.price} {car.currency}</p>
-                        <p><strong>Регион:</strong> {car.region}</p>
+                        <p><strong>Цена:</strong> {car.price} {car.currency || 'Не указана'}</p>
+                        {car.price_usd && <p><strong>Цена (USD):</strong> {car.price_usd}</p>}
+                        {car.price_eur && <p><strong>Цена (EUR):</strong> {car.price_eur}</p>}
+                        {car.price_uah && <p><strong>Цена (UAH):</strong> {car.price_uah}</p>}
+                        {car.exchange_rate_usd && <p><strong>Курс USD:</strong> {car.exchange_rate_usd}</p>}
+                        {car.exchange_rate_eur && <p><strong>Курс EUR:</strong> {car.exchange_rate_eur}</p>}
+                        {car.view_count !== undefined && <p><strong>Просмотры:</strong> {car.view_count}</p>}
+                        {car.view_count_day !== undefined && <p><strong>Просмотры за день:</strong> {car.view_count_day}</p>}
+                        {car.view_count_week !== undefined && <p><strong>Просмотры за неделю:</strong> {car.view_count_week}</p>}
+                        {car.view_count_month !== undefined && <p><strong>Просмотры за месяц:</strong> {car.view_count_month}</p>}
+                        {car.average_price_region !== undefined && <p><strong>Средняя цена в регионе:</strong> {car.average_price_region}</p>}
+                        {car.average_price_ukraine !== undefined && <p><strong>Средняя цена в Украине:</strong> {car.average_price_ukraine}</p>}
+                        <p><strong>Регион:</strong> {car.region || 'Не указан'}</p>
                         <p><strong>Описание:</strong> {car.description}</p>
                         {car.photo ? (
                             <img src={car.photo} alt={`${getBrandName(car.brand)} ${getModelName(car.model)}`} style={{ width: '100px', height: 'auto' }} />
