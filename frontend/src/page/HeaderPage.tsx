@@ -1,31 +1,18 @@
 import React from 'react';
-
-// import css from './HeaderPage.module.css';
-import {NavLink} from 'react-router-dom';
-
-
-
+import { NavLink } from 'react-router-dom';
+import css from './HeaderPage.module.css';
 
 const HeaderPage = () => {
-
-
-
     return (
-        // <div className={css.Header}>
-        <div>
-
-
-            <div>
-
-                <NavLink to={'cars'}>Cars</NavLink>
-                <NavLink to={'user'}>User</NavLink>
-                {/*<NavLink to={`/users/${userId}`}>User By Id</NavLink>*/}
-            </div>
-
+        <div className={css.Header}>
+            <NavLink to={'cars'} className={({ isActive }) => isActive ? css.active : ''}>
+                Просмотр машин без регистрации
+            </NavLink>
+            <NavLink to={'user'} className={({ isActive }) => isActive ? css.active : ''}>
+                Пользователи
+            </NavLink>
         </div>
     );
 };
 
-export {HeaderPage};
-
-
+export { HeaderPage };

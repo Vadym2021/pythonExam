@@ -17,11 +17,13 @@ UserModel = get_user_model()
 
 
 class CarBrandListView(generics.ListAPIView):
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = CarBrand.objects.all()
     serializer_class = CarBrandSerializer
 
 
 class CarBrandModelListView(generics.ListAPIView):
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     serializer_class = CarBrandModelSerializer
 
     def get_queryset(self):

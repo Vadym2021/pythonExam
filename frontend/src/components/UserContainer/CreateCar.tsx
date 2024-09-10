@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import { carService } from '../../services/carService';
 import { Brand, ICarCreate, Model } from '../../interfaces/car.interfase';
+import { AxiosError } from 'axios';
 
 const CreateCar = () => {
     const { id } = useParams<{ id: string }>();
@@ -65,9 +66,21 @@ const CreateCar = () => {
 
             const response = await carService.create(formData);
             setSuccessMessage('Машина успешно создана.');
+            setErrorMessage(null);
             reset();
         } catch (error) {
-            setErrorMessage('Ошибка при создании машины.');
+            const axiosError = error as AxiosError;
+            if (axiosError.response?.data) {
+                if (Array.isArray(axiosError.response.data)) {
+                    setErrorMessage(axiosError.response.data.join(', '));
+                } else if (typeof axiosError.response.data === 'string') {
+                    setErrorMessage(axiosError.response.data);
+                } else {
+                    setErrorMessage('Ошибка при создании машины.');
+                }
+            } else {
+                setErrorMessage('Ошибка при создании машины.');
+            }
             console.error('Ошибка при создании машины:', error);
         }
     };

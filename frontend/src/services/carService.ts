@@ -16,6 +16,9 @@ const carService = {
     getModels(brandId: number) {
         return apiService.get(`${urls.cars.models}?brand=${brandId}`);
     },
+    getAllModels() {
+        return apiService.get(urls.cars.models);
+    },
     activateCar(carId: number) {
         return apiService.patch(`${urls.cars.base}/${carId}/activate`);
     },
