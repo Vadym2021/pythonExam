@@ -1,0 +1,704 @@
+{
+	"info": {
+		"_postman_id": "8ee732ca-621b-4f15-b76b-95a015fc2a33",
+		"name": "PYTHON EXAM",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20163863"
+	},
+	"item": [
+		{
+			"name": "Create user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"aisclass@ukr.net\",\r\n    \"password\": \"Password123!\",\r\n    \"account_type\": \"basic\",\r\n    \"profile\":{\r\n        \"name\":\"BaseTester\",\r\n        \"surname\":\"Popov\",\r\n        \"age\":25\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/user",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create SUPERUSER",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"ais@bigmir.net\",\r\n    \"password\": \"Password123!\",\r\n    \"account_type\": \"basic\",\r\n    \"profile\":{\r\n        \"name\":\"BaseTester\",\r\n        \"surname\":\"Popov\",\r\n        \"age\":25\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/user/create-superuser",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"user",
+						"create-superuser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create AdminUser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"ais@bigmir.net\",\r\n    \"password\": \"Password123!\",\r\n    \"account_type\": \"basic\",\r\n    \"profile\":{\r\n        \"name\":\"BaseTester\",\r\n        \"surname\":\"Popov\",\r\n        \"age\":25\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/user/create-admin",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"user",
+						"create-admin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Activate",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/auth/activate/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWN0aXZhdGUiLCJleHAiOjE3MjUzNDg0ODUsImlhdCI6MTcyNTM0NDg4NSwianRpIjoiM2FlZDNkODhkMTk4NGYwYjhlZTA3MDJjOTg3NjNmYTEiLCJ1c2VyX2lkIjo1fQ.OJ9r8BQOVZIdvVs6s9yaco81oEm2kbfPYZPXJpO9INY",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"activate",
+						"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWN0aXZhdGUiLCJleHAiOjE3MjUzNDg0ODUsImlhdCI6MTcyNTM0NDg4NSwianRpIjoiM2FlZDNkODhkMTk4NGYwYjhlZTA3MDJjOTg3NjNmYTEiLCJ1c2VyX2lkIjo1fQ.OJ9r8BQOVZIdvVs6s9yaco81oEm2kbfPYZPXJpO9INY"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create user basic",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"ais@bigmir.net\",\r\n    \"password\": \"Password123!\",\r\n    \"account_type\": \"basic\",\r\n    \"profile\":{\r\n        \"name\":\"BaseBasicTester\",\r\n        \"surname\":\"Basic\",\r\n        \"age\":28\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/user",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Car",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const res = pm.response.json()\r",
+							"pm.environment.set(\"access\", res.access);\r",
+							"pm.environment.set(\"refresh\", res.refresh);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"brand\": 1,\r\n    \"model\": 1,\r\n    \"year\": 2024,\r\n    \"price\": 7568,\r\n    \"description\":\"nice car\",\r\n    \"currency\": \"USD\",\r\n    \"seller\": 1,\r\n    \"region\":\"Kiev\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/cars",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Car FormData",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const res = pm.response.json()\r",
+							"pm.environment.set(\"access\", res.access);\r",
+							"pm.environment.set(\"refresh\", res.refresh);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "brand",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "model",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "year",
+							"value": "2024",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "8999",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "test description",
+							"type": "text"
+						},
+						{
+							"key": "currency",
+							"value": "USD",
+							"type": "text"
+						},
+						{
+							"key": "seller",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "region",
+							"value": "Kiev",
+							"type": "text"
+						},
+						{
+							"key": "photo",
+							"type": "file",
+							"src": "/C:/Users/aiscl/Desktop/photo.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}/api/cars",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "send e mail no brand",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const res = pm.response.json()\r",
+							"pm.environment.set(\"access\", res.access);\r",
+							"pm.environment.set(\"refresh\", res.refresh);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"brand\": \"delta\",\r\n    \"model\": 1,\r\n    \"year\": 2024,\r\n    \"price\": 7568,\r\n    \"description\":\"nice car\",\r\n    \"currency\": \"USD\",\r\n    \"seller\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/cars/send_brand_request_email",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"cars",
+						"send_brand_request_email"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "send e mail TEST email",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const res = pm.response.json()\r",
+							"pm.environment.set(\"access\", res.access);\r",
+							"pm.environment.set(\"refresh\", res.refresh);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"brand\": 1,\r\n    \"model\": 1,\r\n    \"year\": 2024,\r\n    \"price\": 7568,\r\n    \"description\":\"nice car\",\r\n    \"currency\": \"USD\",\r\n    \"seller\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/user/test",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"user",
+						"test"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const res = pm.response.json()\r",
+							"pm.environment.set(\"access\", res.access);\r",
+							"pm.environment.set(\"refresh\", res.refresh);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"aisclass@ukr.net\",\r\n    \"password\": \"Password123!\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/auth",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login Basic",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const res = pm.response.json()\r",
+							"pm.environment.set(\"access\", res.access);\r",
+							"pm.environment.set(\"refresh\", res.refresh);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"ais@bigmir.net\",\r\n    \"password\": \"Password123!\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/auth",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all cars",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"aisclass@ukr.net\",\r\n    \"password\": \"Password123!\",\r\n    \"profile\":{\r\n        \"name\":\"BaseTester\",\r\n        \"surname\":\"Popov\",\r\n        \"age\":25\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/cars",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Car By Id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"aisclass@ukr.net\",\r\n    \"password\": \"Password123!\",\r\n    \"profile\":{\r\n        \"name\":\"BaseTester\",\r\n        \"surname\":\"Popov\",\r\n        \"age\":25\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/cars/3",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"cars",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get cars by user id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"aisclass@ukr.net\",\r\n    \"password\": \"Password123!\",\r\n    \"profile\":{\r\n        \"name\":\"BaseTester\",\r\n        \"surname\":\"Popov\",\r\n        \"age\":25\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/user/1",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"user",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all users",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/user",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Car Brands",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/user",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Car Models",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/cars/models",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"cars",
+						"models"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
