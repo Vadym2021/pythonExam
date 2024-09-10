@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from datetime import datetime
 
+
 @dataclass
 class CarDataClass:
     id: int
@@ -26,6 +27,7 @@ class CarDataClass:
     view_count_day: int
     view_count_week: int
     view_count_month: int
+
 
 @dataclass
 class ProfileDataClass:

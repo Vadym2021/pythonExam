@@ -5,7 +5,6 @@ from rest_framework import status
 from rest_framework.generics import GenericAPIView, get_object_or_404
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
-from rest_framework_simplejwt.serializers import TokenRefreshSerializer as DefaultTokenRefreshSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 from drf_yasg.utils import swagger_auto_schema
@@ -68,7 +67,8 @@ class RecoveryPasswordView(GenericAPIView):
 
 
 @method_decorator(name='post',
-                  decorator=swagger_auto_schema(responses={status.HTTP_200_OK: CustomTokenObtainPairSerializer()}, security=[]))
+                  decorator=swagger_auto_schema(responses={status.HTTP_200_OK: CustomTokenObtainPairSerializer()},
+                                                security=[]))
 class TokenPairView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
 

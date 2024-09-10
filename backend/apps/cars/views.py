@@ -88,7 +88,7 @@ class CarListCreateView(ListCreateAPIView):
         instance.is_active = True
 
         update_car_price_for_instance(instance)
-        # update_car_prices()
+
         StatService.increment_view_count(instance)
         instance.save()
 

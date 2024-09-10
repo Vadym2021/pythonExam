@@ -8,8 +8,8 @@ __pycache__/
 # Runtime directories
 celerybeat-schedule/
 
-# Environment variables
-.env
+## Environment variables
+#.env
 
 # IDE files
 .idea/
@@ -19,3 +19,9 @@ celerybeat-schedule/
 
 # Dependency directories
 venv/
+
+# Static files
+static/
+
+# Media files (storage contains media)
+storage/

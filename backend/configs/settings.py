@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'corsheaders',
 ]
 
-
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',  # Добавлено для поддержки CORS
     'django.middleware.common.CommonMiddleware',
