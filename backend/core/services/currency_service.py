@@ -40,8 +40,6 @@ def update_car_price_for_instance(car):
 @shared_task
 def update_car_prices():
     cars = CarModel.objects.all()
-    print(f"Found {cars.count()} cars.")
-    print(cars.__dict__)
 
     response = requests.get('https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5')
     rates = response.json()
@@ -49,7 +47,7 @@ def update_car_prices():
     rates_dict['UAH'] = Decimal('1.0')
 
     for car in cars:
-        print(car.__dict__)
+
         initial_currency = car.currency
         initial_price = Decimal(car.price)
 
@@ -68,5 +66,5 @@ def update_car_prices():
 
         car.exchange_rate_usd = rates_dict['USD']
         car.exchange_rate_eur = rates_dict['EUR']
-        print(car.__dict__)
+
         car.save()
